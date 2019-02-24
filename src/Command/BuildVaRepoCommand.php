@@ -19,11 +19,11 @@ class BuildVaRepoCommand extends BaseCommand
     {
         $this->setName('build-va-repo')
             ->setDescription('Build all required packages as versionize archive(version in archive filename).')
-            ->setDefinition([
+            ->setDefinition(array(
                 new InputOption('dir', null, InputOption::VALUE_OPTIONAL, 'Write the archive to this directory', 'va-repo'),
                 new InputOption('format', 'f', InputOption::VALUE_OPTIONAL, 'Format of the resulting archive: tar or zip', 'zip'),
                 new InputOption('ignore-filters', false, InputOption::VALUE_NONE, 'Ignore filters when saving package'),
-            ]);
+            ));
     }
 
     /**
@@ -45,7 +45,7 @@ class BuildVaRepoCommand extends BaseCommand
         $packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
 
         //archiving...
-        $result = [];
+        $result = array();
         foreach ($packages as $package) {
             if ($package instanceof CompletePackage) {
                 $targetPath = $this->archive($package, $dir, $format, $ignoreFilters);

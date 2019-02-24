@@ -5,7 +5,6 @@ namespace Revonia\VersionizeArch;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
-use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
@@ -38,7 +37,7 @@ class Plugin implements PluginInterface, Capable, EventSubscriberInterface
     public function getCapabilities()
     {
         return array(
-            CommandProviderCapability::class => CommandProvider::class,
+            'Composer\Plugin\Capability\CommandProvider' => 'Revonia\VersionizeArch\CommandProvider',
         );
     }
 
@@ -47,7 +46,7 @@ class Plugin implements PluginInterface, Capable, EventSubscriberInterface
         $rm = $this->composer->getRepositoryManager();
         $rm->setRepositoryClass('va', 'Revonia\VersionizeArch\Repository\VaRepository');
 
-        $pushed = [];
+        $pushed = array();
 
         foreach ($rm->getRepositories() as $repository) {
             if ($repository instanceof VaRepository) {
@@ -86,7 +85,7 @@ class Plugin implements PluginInterface, Capable, EventSubscriberInterface
     {
         $extra = $this->composer->getPackage()->getExtra();
         if (!isset($extra['extra-repositories'])) {
-            return [];
+            return array();
         }
 
         return $extra['extra-repositories'];
