@@ -1,0 +1,27 @@
+{
+  "name": "revonia/versionize-arch",
+  "type": "composer-plugin",
+  "description": "A composer plugin provides new extra repository type 'va', working same as 'artifact' but fetch version from filename, and a command for build all required packages as versionize archive.",
+  "require": {
+    "composer-plugin-api": "^1.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5",
+    "composer/composer": "^1.8",
+    "mikey179/vfsStream": "^1.6"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Revonia\\VersionizeArch\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Revonia\\VersionizeArch\\Tests": "tests/"
+    }
+  },
+  "extra": {
+    "class": "Revonia\\VersionizeArch\\Plugin"
+  }
+}
